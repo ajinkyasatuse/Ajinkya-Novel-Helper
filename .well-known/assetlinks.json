@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "app.ajinkya.novelhelper",
+    "sha256_cert_fingerprints":
+    ["A0:9C:BA:98:5C:1F:06:8D:BD:C1:C8:DD:BF:CD:E7:73:B2:5B:03:5A:52:97:32:8D:8B:0C:66:23:C3:49:1C:48"]
+  }
+}]

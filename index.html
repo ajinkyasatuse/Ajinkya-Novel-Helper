@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg width='512' height='512' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><rect width='100' height='100' rx='20' fill='%230ea5e9'/><g transform='translate(50, 50) rotate(45) scale(1.2)'><path d='M 0 -22 L 7 -10 L 0 -13 L -7 -10 Z' fill='%23ffffff'/><rect x='-1.5' y='-10' width='3' height='25' fill='%23ffffff'/></g><g transform='translate(30, 70)'><path d='M 0 -8 L 2 -2 L 8 0 L 2 2 L 0 8 L -2 2 L -8 0 L -2 -2 Z' fill='%2318181b' stroke='%23ffffff' stroke-width='1.5'/></g></svg>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <title>Ajinkya Novel Helper</title>
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#09090b" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'primary': 'var(--color-primary)',
+              'secondary': 'var(--color-secondary)',
+              'accent': 'var(--color-accent)',
+              'text-primary': 'var(--color-text-primary)',
+              'text-secondary': 'var(--color-text-secondary)',
+            },
+            fontFamily: {
+              'sans': ['Inter', 'sans-serif'],
+              'script': ['"Courier Prime"', 'monospace'],
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.2s ease-out',
+              'slide-in': 'slideIn 0.3s ease-out',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              slideIn: {
+                '0%': { transform: 'translateY(-10px)', opacity: '0' },
+                '100%': { transform: 'translateY(0)', opacity: '1' },
+              }
+            }
+          },
+        },
+      }
+    </script>
+    <style type="text/css">
+      :root, [data-theme="ajinkya-dark"] {
+          --color-primary: #09090b; /* Zinc 950 */
+          --color-secondary: #18181b; /* Zinc 900 */
+          --color-accent: #0ea5e9; /* Sky 500 */
+          --color-text-primary: #fafafa; /* Zinc 50 */
+          --color-text-secondary: #a1a1aa; /* Zinc 400 */
+      }
+      [data-theme="light"] {
+          --color-primary: #ffffff;
+          --color-secondary: #f4f4f5; /* Zinc 100 */
+          --color-accent: #0284c7; /* Sky 600 */
+          --color-text-primary: #18181b;
+          --color-text-secondary: #71717a;
+      }
+      [data-theme="instagram"] {
+          --color-primary: #ffffff;
+          --color-secondary: #fafafa;
+          --color-accent: #e1306c;
+          --color-text-primary: #262626;
+          --color-text-secondary: #8e8e8e;
+      }
+      :root {
+        --editor-font-size: 18px; /* default */
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--color-primary); 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #3f3f46; 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #52525b; 
+      }
+      
+      .no-scrollbar::-webkit-scrollbar {
+          display: none;
+      }
+      .no-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+      }
+      
+      /* Editor Content Editable Styles */
+      .editor-content:empty:before {
+        content: attr(placeholder);
+        color: var(--color-text-secondary);
+        opacity: 0.5;
+        pointer-events: none;
+      }
+      .editor-content:focus {
+        outline: none;
+      }
+      
+      /* Script Mode Styles */
+      .script-mode {
+          font-family: 'Courier Prime', monospace !important;
+          line-height: 1.0 !important;
+          max-width: 8.5in !important; 
+      }
+      .script-mode p, .script-mode div { margin-bottom: 1em; min-height: 1em; }
+      
+      .script-mode .scene-heading { 
+          font-weight: bold; 
+          text-transform: uppercase; 
+          margin-top: 2em !important; 
+          margin-bottom: 1em !important; 
+          display: block;
+      }
+      .script-mode .action { 
+          margin-bottom: 1em;
+          display: block; 
+      }
+      .script-mode .character { 
+          font-weight: bold; 
+          text-transform: uppercase; 
+          margin-top: 1.5em !important; 
+          margin-bottom: 0em !important;
+          margin-left: 35% !important; 
+          margin-right: 25% !important;
+          display: block;
+      }
+      .script-mode .parenthetical { 
+          font-style: italic; 
+          margin-left: 30% !important; 
+          margin-right: 35% !important;
+          margin-bottom: 0em !important;
+          font-size: 0.95em;
+          display: block;
+      }
+      .script-mode .dialogue { 
+          margin-left: 20% !important;
+          margin-right: 20% !important;
+          margin-bottom: 1.5em !important;
+          display: block;
+      }
+      .script-mode .transition { 
+          text-transform: uppercase; 
+          text-align: right; 
+          margin-top: 1.5em !important; 
+          margin-right: 5% !important;
+          margin-bottom: 1em !important;
+          display: block;
+      }
+    </style>
+    <!-- PDF Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+      // We set the workerSrc here to ensure it's available globally before usage
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- Export Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://unpkg.com/docx@8.5.0/build/index.js"></script>
+</head>
+  <body class="bg-primary text-text-primary font-sans antialiased selection:bg-accent selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js')
+            .then(registration => {
+              console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            })
+            .catch(err => {
+              console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>

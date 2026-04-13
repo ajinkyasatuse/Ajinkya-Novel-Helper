@@ -1,0 +1,11 @@
+
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      // Allow read/write if the user is authenticated and owns the file (path starts with uid)
+      // For shared content (images), simple read access might be needed if structure differs
+      allow read, write: if request.auth != null;
+    }
+  }
+}

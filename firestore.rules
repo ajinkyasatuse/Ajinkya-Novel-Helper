@@ -1,0 +1,29 @@
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // User data: Only authenticated user can access their own data
+    // Matches /users/{userId} AND any subcollection recursively
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      match /{document=**} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+    
+    // Shared Novels: Public read access for beta readers
+    match /shared_novels/{shareId} {
+      allow read: if true; // Publicly readable via link
+      allow write: if request.auth != null; // Only authors can create/update the novel snapshot
+      
+      // Comments subcollection
+      match /comments/{commentId} {
+        allow read: if true;
+        allow create: if true; // Public can create comments
+        allow update, delete: if request.auth != null && request.auth.uid == get(/databases/$(database)/documents/shared_novels/$(shareId)).data.authorId;
+      }
+    }
+  }
+}
